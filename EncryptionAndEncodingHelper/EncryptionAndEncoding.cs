@@ -12,15 +12,15 @@ namespace EncryptionAndEncodingHelper
     {
         private static TripleDESCryptoServiceProvider encrypter = new TripleDESCryptoServiceProvider();
        //Constructor
-        public EncryptionAndEncoding(byte[] Key, byte[] IV)
+        public EncryptionAndEncoding(string Key, string IV)
         {
             //Add the Key, InitializationVector, the KeySize, the cypher mode and the padding to the encryptor object
-            encrypter.Key = Key;
-            encrypter.IV = IV;
+            encrypter.Key = Encoding.UTF8.GetBytes(Key);
+            encrypter.IV = Encoding.UTF8.GetBytes(IV);
             encrypter.Padding = PaddingMode.ISO10126;
         }
 
-        private static String EncryptAndEncodeText(string Data)
+        public String EncryptAndEncodeText(string Data)
         {
             try
             {
@@ -65,7 +65,7 @@ namespace EncryptionAndEncodingHelper
         /// <param name="Key">The key for the decryption algorithm</param>
         /// <param name="IV">the Intialization vector </param>
         /// <returns></returns>
-        private static string DecryptAndDecodeText(String Data)
+        public string DecryptAndDecodeText(String Data)
         {
             try
             {
